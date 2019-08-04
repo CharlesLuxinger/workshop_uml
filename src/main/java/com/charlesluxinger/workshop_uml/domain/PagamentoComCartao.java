@@ -1,15 +1,18 @@
 package com.charlesluxinger.workshop_uml.domain;
 
+import javax.persistence.Entity;
+
 import com.charlesluxinger.workshop_uml.domain.enums.EstadoPagamento;
 
-public class PagamentoComCartao extends Pagamento{
-	
+@Entity
+public class PagamentoComCartao extends Pagamento {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer numeroParcelas;
 
 	public PagamentoComCartao() {
-	
+
 	}
 
 	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroParcelas) {
@@ -24,6 +27,5 @@ public class PagamentoComCartao extends Pagamento{
 	public void setNumeroParcelas(Integer numeroParcelas) {
 		this.numeroParcelas = numeroParcelas;
 	}
-	
-	
+
 }

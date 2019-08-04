@@ -2,8 +2,11 @@ package com.charlesluxinger.workshop_uml.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.charlesluxinger.workshop_uml.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento{
 	
 	private static final long serialVersionUID = 1L;
