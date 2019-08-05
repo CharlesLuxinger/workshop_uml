@@ -13,6 +13,7 @@ import com.charlesluxinger.workshop_uml.domain.Cidade;
 import com.charlesluxinger.workshop_uml.domain.Cliente;
 import com.charlesluxinger.workshop_uml.domain.Endereco;
 import com.charlesluxinger.workshop_uml.domain.Estado;
+import com.charlesluxinger.workshop_uml.domain.ItemPedido;
 import com.charlesluxinger.workshop_uml.domain.Pagamento;
 import com.charlesluxinger.workshop_uml.domain.PagamentoComBoleto;
 import com.charlesluxinger.workshop_uml.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.charlesluxinger.workshop_uml.repositories.CidadeRepository;
 import com.charlesluxinger.workshop_uml.repositories.ClienteRepository;
 import com.charlesluxinger.workshop_uml.repositories.EnderecoRepository;
 import com.charlesluxinger.workshop_uml.repositories.EstadoRepository;
+import com.charlesluxinger.workshop_uml.repositories.ItemPedidoRepository;
 import com.charlesluxinger.workshop_uml.repositories.PagamentoRepository;
 import com.charlesluxinger.workshop_uml.repositories.PedidoRepository;
 import com.charlesluxinger.workshop_uml.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class WorkshopUmlApplication implements CommandLineRunner {
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(WorkshopUmlApplication.class, args);
@@ -119,6 +124,19 @@ public class WorkshopUmlApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2));
+		
+		ItemPedido itemp1 = new ItemPedido(ped1, p1, 0.0, 1, 2000.0);
+		ItemPedido itemp2 = new ItemPedido(ped1, p3, 0.0, 2, 80.0);
+		ItemPedido itemp3 = new ItemPedido(ped2, p2, 100.0, 1, 800.0);
+		
+		ped1.getItens().addAll(Arrays.asList(itemp1, itemp2));
+		ped2.getItens().addAll(Arrays.asList(itemp3));
+		
+		p1.getItens().addAll(Arrays.asList(itemp1));
+		p2.getItens().addAll(Arrays.asList(itemp3));
+		p3.getItens().addAll(Arrays.asList(itemp2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(itemp1, itemp2, itemp3));
 	}
 
 }
